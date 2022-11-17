@@ -1,54 +1,9 @@
 
-import { useEffect, useState }  from "react"
+import {useState} from "react"
 import { useForm } from 'react-hook-form';
-
-//認証用
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Register from "./Register";
-import Login from "./Login";
-import Mypage from "./Mypage";
-//認証用
-
-
-
-
-
-
-import {
-  collection,
-  getDocs,
-  orderBy,
-  query,
-  onSnapshot,
-} from "firebase/firestore";
-import db from "./firebase";
-
-
-
 
 
 function App() {
-
-  /* firebase ここから */
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    const postData = collection(db, "posts");
-    const q = query(postData, orderBy("timestamp", "desc"));
-    getDocs(q).then((snapShot) => {
-      console.log(snapShot.docs);
-      setPosts(snapShot.docs.map((doc) => ({ ...doc.data() })));
-    });
-
-    /* リアルタイムで取得 */
-    onSnapshot(q, (querySnapshot) => {
-      // console.log(querySnapshot.docs);
-      setPosts(querySnapshot.docs.map((doc) => ({ ...doc.data() })));
-    });
-  }, []);
-
-  /* firebase ここまで */
-
 
   /* react-hook-form ここから */
   /* useForm使用準備 =>hook-formはこういう設定ということで内容は深く考えない。。*/
@@ -143,17 +98,6 @@ const ToggleTodo = (todo) => {
 
     <div>
       <div>
-        <label>認証用表示：ここから</label>
-        <BrowserRouter>
-          <Routes>
-            <Route path={`/register/`} element={<Register />} />
-            <Route path={`/login/`} element={<Login />} />
-            <Route path={`/`} element={<Mypage />} />
-          </Routes>
-        </BrowserRouter>
-        <p></p>
-        <label>認証用表示：ここまで</label>
-        <p></p>
 
          {/* 編集ボタンを押すと表示*/}
          {isEditable ? (
@@ -186,22 +130,6 @@ const ToggleTodo = (todo) => {
         </div>
       ) :   (
         <div>
-
- 
-<label>firebase/firestore表示：ここから</label>
-{posts.map((post) => (
-          <div key={post.title}>
-            <h1>{post.title}</h1>
-            <p>{post.text}</p>
-
-          </div>
-        ))}
-        {/* <div>fsa</div>
-        <div>fds</div>
-        <div>fdfd</div> */}
-<label>firebase/firestore表示：ここまで</label>
-<p></p>
-<label>Local表示：ここから</label>
 
 
           {/* 新規登録*/}

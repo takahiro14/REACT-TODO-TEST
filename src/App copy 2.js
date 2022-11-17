@@ -2,17 +2,6 @@
 import { useEffect, useState }  from "react"
 import { useForm } from 'react-hook-form';
 
-//認証用
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Register from "./Register";
-import Login from "./Login";
-import Mypage from "./Mypage";
-//認証用
-
-
-
-
-
 
 import {
   collection,
@@ -143,17 +132,10 @@ const ToggleTodo = (todo) => {
 
     <div>
       <div>
-        <label>認証用表示：ここから</label>
-        <BrowserRouter>
-          <Routes>
-            <Route path={`/register/`} element={<Register />} />
-            <Route path={`/login/`} element={<Login />} />
-            <Route path={`/`} element={<Mypage />} />
-          </Routes>
-        </BrowserRouter>
-        <p></p>
-        <label>認証用表示：ここまで</label>
-        <p></p>
+{/* 編集ボタンを押すと表示*/}
+
+
+        
 
          {/* 編集ボタンを押すと表示*/}
          {isEditable ? (
@@ -186,8 +168,6 @@ const ToggleTodo = (todo) => {
         </div>
       ) :   (
         <div>
-
- 
 <label>firebase/firestore表示：ここから</label>
 {posts.map((post) => (
           <div key={post.title}>
