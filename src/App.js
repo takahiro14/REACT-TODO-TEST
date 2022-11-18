@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 import { useEffect, useState }  from "react"
 import { useForm } from 'react-hook-form';
 
@@ -79,6 +80,60 @@ const onSubmit1 = (todo) => {
   /* useState定義 ここまで */
 
   /* 編集用ハンドラー　=>なんだか効率悪いね。。。 */
+=======
+import {useState} from "react"
+
+function App() {
+
+  const [todos, setTodos] = useState([])
+  const [todoTitle, setTodoTitle] = useState('')
+  const [todoId, setTodoId] = useState(todos.length + 1)
+  const [isEditable, setIsEditable] = useState(false)
+  const [editId, setEditId] = useState('')
+  const [todoStatus, setTodoStatus] = useState('')
+  const [todoShousai, setTodoShousai] = useState('')
+  const [newTitle, setNewTitle] = useState('')
+  const [newStatus, setNewStatus] = useState('')
+  const [newShousai, setNewShousai] = useState('')
+
+
+
+  //タイトル入力時にステートメントへ保存
+  const handleAddFormChanges = (e) => {
+    setTodoTitle(e.target.value)
+  }
+  //ステータス選択時にステートメントへ保存
+  const handleAddFormChanges2 = (f) => {
+    setTodoStatus(f.target.value)
+  }
+  //タイトル入力時にステートメントへ保存
+  const handleAddFormChanges3 = (g) => {
+    setTodoShousai(g.target.value)
+  }
+
+  //ここからTUDO追加処理開始
+  const handleAddTodo = () => {
+    //タスクを追加する
+
+    //タイトル空であればなにもしない
+    if(todoTitle === "") return; 
+
+    //Todo空箱新規作成
+    setTodos([...todos, { id: todoId, title: todoTitle , completed: false, status: todoStatus, shousai: todoShousai }])
+   
+    //IDをインクリメントして増やす。ただし重複の可能性があり、簡易版とする。UUIDを利用したほうがよいかも。
+    setTodoId(todoId + 1)
+
+    //ステートメント記録
+    setTodoTitle('')
+    setTodoStatus('')
+    setTodoShousai('')
+
+  }
+  //追加処理終わり
+
+   //追加編集機能
+>>>>>>> 7a5962f442eab328bc7e8c3987079c9145502145
   const handleCloseEditForm = () => {
     setIsEditable(false)
     setEditId('')
@@ -92,30 +147,50 @@ const onSubmit1 = (todo) => {
   const handleEditFormChange3 = (g) => {
     setNewShousai(g.target.value)
   }
+<<<<<<< HEAD
   /* 編集用ハンドラー ここまで*/
 
 
   /* 削除用用ハンドラー */
+=======
+
+
+  //削除 これはうまくいく
+>>>>>>> 7a5962f442eab328bc7e8c3987079c9145502145
   const handleDeleteTodo = (targetTodo) => {
     setTodos(todos.filter((todo) => todo.id !== targetTodo.id))
   }
 
+<<<<<<< HEAD
   /* 編集メニュOPENハンドラー */
   const handleOpenEditForm = (todo) => {
     setIsEditable(true)
 
     /* todoパラメータを各オブジェクトにセットする。=>ん～効率悪いね。。*/
+=======
+  //編集フォームを有効化、パラメータをセットする
+  const handleOpenEditForm = (todo) => {
+    setIsEditable(true)
+>>>>>>> 7a5962f442eab328bc7e8c3987079c9145502145
     setEditId(todo.id)
     setNewTitle(todo.title)
     setNewStatus(todo.status)
     setNewShousai(todo.shousai)
   }
 
+<<<<<<< HEAD
   /* 編集用ハンドラー */
   const handleEditTodo = () => {
 
     const newArray = todos.map((todo) =>
       todo.id === editId ? { ...todo, id: editId, title: newTitle , status: newStatus, shousai: newShousai } : todo
+=======
+
+  //編集する
+  const handleEditTodo = () => {
+    const newArray = todos.map((todo) =>
+      todo.id === editId ? { ...todo, title: newTitle , status: newStatus, shousai: newShousai } : todo
+>>>>>>> 7a5962f442eab328bc7e8c3987079c9145502145
     )
     setTodos(newArray)
     setEditId('')
@@ -123,12 +198,17 @@ const onSubmit1 = (todo) => {
     setNewStatus('')
     setNewShousai('')
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7a5962f442eab328bc7e8c3987079c9145502145
     //編集後にフォームを閉じる
     handleCloseEditForm('')
     //
   }
 
 
+<<<<<<< HEAD
   /* チェック後完了ステータス変更用ハンドラー =>アロー関数のmap処理の使い方は後でググろう。*/
 const ToggleTodo = (todo) => {
   const newArray = todos.map(_todo => {
@@ -137,12 +217,24 @@ const ToggleTodo = (todo) => {
   setTodos(newArray);
 };
 
+=======
+//チェックボックス操作　チェック後完了としたいがうまくいかない
+const ToggleTodo = (todo) => {
+  setEditId(todo.id)
+  const newArray = todos.map(() =>
+  todo.id === editId ? { ...todo, status: '完了' } : todo
+)
+setTodos(newArray)
+
+}
+>>>>>>> 7a5962f442eab328bc7e8c3987079c9145502145
 
 //html出力
   return (
 
     <div>
       <div>
+<<<<<<< HEAD
         <label>認証用表示：ここから</label>
         <BrowserRouter>
           <Routes>
@@ -154,12 +246,17 @@ const ToggleTodo = (todo) => {
         <p></p>
         <label>認証用表示：ここまで</label>
         <p></p>
+=======
+>>>>>>> 7a5962f442eab328bc7e8c3987079c9145502145
 
          {/* 編集ボタンを押すと表示*/}
          {isEditable ? (
         <div>
+<<<<<<< HEAD
 
          {/* 旧フォーム　ここから*/}
+=======
+>>>>>>> 7a5962f442eab328bc7e8c3987079c9145502145
           <br/>
           タイトル：
           <input
@@ -171,7 +268,11 @@ const ToggleTodo = (todo) => {
           <br/>
           ステータス：
           <select value={newStatus} onChange={handleEditFormChange2}>
+<<<<<<< HEAD
           <option >↓ステータス選択</option>
+=======
+          <option selected>↓ステータス選択</option>
+>>>>>>> 7a5962f442eab328bc7e8c3987079c9145502145
             <option value='未着手'>未着手</option>
             <option value='作業中'>作業中</option>
             <option value='完了'>完了</option>
@@ -182,6 +283,7 @@ const ToggleTodo = (todo) => {
           <br/>
           <button onClick={handleEditTodo}>編集を保存</button>
           <button onClick={handleCloseEditForm}>キャンセル</button>
+<<<<<<< HEAD
          {/* 旧フォーム　ここまで*/}
         </div>
       ) :   (
@@ -228,6 +330,36 @@ const ToggleTodo = (todo) => {
       )}
       </div>
       <div>残りの未了タスク:  {todos.filter((todo) => todo.status!=="完了").length}</div>
+=======
+        </div>
+      ) :   (
+        <div>
+          <br/>
+          タイトル：
+          <input
+            type="text"
+            label="タイトル"
+            value={todoTitle}
+            onChange={handleAddFormChanges}
+          />
+          <br/>
+          ステータス：
+          <select value={todoStatus} onChange={handleAddFormChanges2}>
+          <option selected>↓ステータス選択</option>
+            <option value='未着手'>未着手</option>
+            <option value='作業中'>作業中</option>
+            <option value='完了'>完了</option>
+          </select>
+          <br/>
+          詳細：
+          <textarea  type="text" value={todoShousai} onChange={handleAddFormChanges3}></textarea >
+          <br/>
+          <button onClick={handleAddTodo}>作成</button>
+        </div>
+      )}
+      </div>
+      <div>残りのタスク:  {todos.filter((todo) => !todo.complated).length}</div>
+>>>>>>> 7a5962f442eab328bc7e8c3987079c9145502145
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
@@ -237,7 +369,13 @@ const ToggleTodo = (todo) => {
             <div>ステータス：{todo.status}</div>
             <div>詳細：{todo.shousai}</div>
 
+<<<<<<< HEAD
             <button onClick={() => handleOpenEditForm(todo)}>編集</button>
+=======
+
+            <button onClick={() => handleOpenEditForm(todo)}>編集</button>
+
+>>>>>>> 7a5962f442eab328bc7e8c3987079c9145502145
             <button onClick={() => handleDeleteTodo(todo)}>削除</button>
           </li>
         ))}
